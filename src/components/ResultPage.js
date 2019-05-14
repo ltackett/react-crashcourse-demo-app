@@ -9,16 +9,15 @@ export const ResultPage = (props) => {
   const url = `https://swapi.co/api${props.location.pathname}`
 
   React.useEffect(() => {
-    fetch(url)
-      .then((res) => {
-        res.json().then(data => {
-          // Put the data into app state
-          setResult({ data })
-      })
-      .catch(() => {
-        throw new Error()
-      })
-  })}, [])
+    async function fetchDataAsync()
+    {
+      let res = await fetch(url)
+      let data = await res.json()
+      setResult({data})
+    }
+
+    fetchDataAsync()
+  }, [])
   
   return (
     <>

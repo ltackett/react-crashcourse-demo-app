@@ -14,34 +14,38 @@ export const API = (props) => {
   //   4. Catch errors
   React.useEffect(() => {
     // If there's no URL, or the URL is invalid, exit
-    if (state.url === '' || !isValidURL(state.url)) {
+    if (!isValidURL(state.url)) {
       return
     }
     
-    // Trigger a fetch
-    setState({ ...state, searchStatus: 'searching'})
-    fetch(`${state.url}${state.page ? `&page=${state.page}` : ''}`)
-      .then((res) => {
-        res.json().then(data => {
-          let pages
-          if (data.count > 10) {
-            pages = Math.ceil(data.count / 10)
-          }
-  
-          // Put the data into app state
-          setState({ ...state, data, pages, searchStatus: 'complete' })
-  
+    async function searchAsync()
+    {
+      setState({ ...state, searchStatus: 'searching'})
+
+      try 
+      {
+        const res = await fetch(`${state.url}${state.page ? `&page=${state.page}` : ''}`);
+        const data = await res.json();
+        
+        let pages = Math.ceil(data.count / 10)
+       
+        // Put the data into app state
+        setState((currentState) => { return { ...currentState, data, pages, searchStatus: 'complete' }})
+
           // ... and redirect
-          if (props.location.pathname === '/') {
-            props.history.push('/results')
-          }
-        })
-      })
-  
-      .catch(() => {
+        if (props.location.pathname === '/') 
+        {
+          props.history.push('/results')
+        }
+      } 
+      catch(err)
+      {
         setState({ ...state, searchStatus: 'error'})
-        throw new Error()
-      })
+        throw err
+      }
+    }
+
+    searchAsync();
   }, [state.url, state.page])
 
   return null

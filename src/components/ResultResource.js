@@ -5,16 +5,15 @@ export const ResultResource = (props) => {
   const [data, setData] = React.useState()
 
   React.useEffect(() => {
-    fetch(props.url)
-      .then((res) => {
-        res.json().then(data => {
-          // Put the data into app state
-          setData(data)
-      })
-      .catch((err) => {
-        throw new Error()
-      })
-  })}, [])
+    async function fetchData()
+    {
+      let res = await fetch(props.url);
+      let data = await res.json();
+      setData(data);
+    }
+
+    fetchData();
+  }, [])
   
   return (
     <>
