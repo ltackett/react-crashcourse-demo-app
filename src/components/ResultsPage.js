@@ -3,7 +3,6 @@ import { initialState } from '../initialState'
 import { Route } from 'react-router'
 import { Context } from '../contexts'
 import { Results } from './Results'
-import { ResultPage } from './ResultPage'
 import { Pagination } from './Pagination'
 import { ActionButton } from 'office-ui-fabric-react/lib/Button';
 
