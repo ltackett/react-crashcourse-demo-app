@@ -6,6 +6,7 @@ import { initialState } from '../initialState'
 import { API } from './API'
 import { Context } from '../contexts'
 import { ResultsPage } from './ResultsPage'
+import { ResultPage } from './ResultPage';
 import { SearchPage } from './SearchPage'
 
 import { initializeIcons } from '@uifabric/icons';
@@ -24,6 +25,7 @@ export const App = () => {
 
           <Switch>
             <Route exact path='/' component={SearchPage} />
+            <Route exact path={`/${state.searchResource}/:id`} component={ResultPage} />
             <Route path='/results' component={ResultsPage} />
           </Switch>
         </Router>

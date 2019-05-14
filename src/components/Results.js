@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Context } from '../contexts'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
 
@@ -38,9 +39,17 @@ export const Results = (props) => {
         <>
           <p>Showing {lower} - {upper} results out of {state.data && state.data.count}</p>
           <ul>
-            {state.data && state.data.results && state.data.results.map((result) => 
-              <li key={result.name}>{result.name}</li>
-            )}
+            {state.data && state.data.results && state.data.results.map((result) => {
+              const resultUrl = result.url.replace('https://swapi.co/api', '')
+              
+              return (
+                <li key={result.name}>
+                  <Link to={resultUrl} url={result.url}>
+                    {result.name}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </>
       )}

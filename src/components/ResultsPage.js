@@ -1,7 +1,9 @@
 import React from 'react'
 import { initialState } from '../initialState'
+import { Route } from 'react-router'
 import { Context } from '../contexts'
 import { Results } from './Results'
+import { ResultPage } from './ResultPage'
 import { Pagination } from './Pagination'
 import { ActionButton } from 'office-ui-fabric-react/lib/Button';
 
@@ -18,22 +20,26 @@ export const ResultsPage = (props) => {
 
   return (
     <>
-      <header>
-        <p>
-          You searched for: "{state.searchTerm}"
-          <ActionButton
-            onClick={() => setState(initialState)}
-            iconProps={{ iconName: 'Cancel' }}
-            style={{ marginTop: -8, marginLeft: 100 }}
-          >
-            Clear Search
-          </ActionButton>
-        </p>
-      </header>
-      <main>
-        <Results {...props} />
-        <Pagination {...props} />
-      </main>
-    </>
+    <Route exact path='/results' render={(routeProps) => (
+      <>
+        <header>
+          <p>
+            You searched for: "{state.searchTerm}"
+            <ActionButton
+              onClick={() => setState(initialState)}
+              iconProps={{ iconName: 'Cancel' }}
+              style={{ marginTop: -8, marginLeft: 100 }}
+            >
+              Clear Search
+            </ActionButton>
+          </p>
+        </header>
+        <main>
+          <Results {...props} />
+          <Pagination {...props} />
+        </main>
+      </>
+    )} />
+  </>
   )
 }
