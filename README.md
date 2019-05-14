@@ -1,0 +1,1 @@
+Example React app that shows functional components, application state, hooks, contexts, non-rendering (data-only) components, and API integration.
