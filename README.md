@@ -16,3 +16,23 @@ cd react-crashcourse-demo-app
 npm install
 npm start
 ```
+
+## Component Tree
+
+```
+<App>
+  <ContextProvider>
+    <Router>
+      <API />
+
+      <SearchPage>
+        <Search />
+      </SearchPage>
+
+      <ResultsPage>
+        <Results />
+        <Pagination />
+      </ResultsPage>
+    </Router>
+  </ContextProvider>
+</App>

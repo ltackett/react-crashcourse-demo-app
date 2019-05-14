@@ -24,7 +24,7 @@ export const ResultsPage = (props) => {
           <ActionButton
             onClick={() => setState(initialState)}
             iconProps={{ iconName: 'Cancel' }}
-            style={{ marginTop: -8}}
+            style={{ marginTop: -8, marginLeft: 100 }}
           >
             Clear Search
           </ActionButton>

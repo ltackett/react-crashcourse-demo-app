@@ -40,6 +40,7 @@ export const API = (props) => {
   
       .catch(() => {
         setState({ ...state, searchStatus: 'error'})
+        throw new Error()
       })
   }, [state.url, state.page])
 
